@@ -1,0 +1,20 @@
+name: dev-23a-foss2022a-mpi
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image to check sequence of commands
+      run: make dev-23a-foss2022a-mpi
+
