@@ -65,6 +65,14 @@ RUN ./mpsd-software-environment.py --help
 RUN ./mpsd-software-environment.py -l debug install dev-23a --toolchain foss2022a-mpi
 
 # RUN 
+USER root
+RUN apt-get -y update
+RUN apt-get -y install automake libtool
+
+WORKDIR /home/user
+ADD install-octopus.sh .
+RUN ls -l
+RUN bash -e -x install-octopus.sh
 
 USER root
 RUN echo "use user 'user' for normal operation ('su - user')"
