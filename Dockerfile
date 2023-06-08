@@ -30,7 +30,7 @@ RUN apt-get install -y --no-install-recommends \
 RUN apt-get -y install wget time nano vim emacs vim
 
 # Tools needed by mpsd-software-environment.py (and ../spack-setup.sh)
-RUN apt-get -y install rsync automake libtool
+RUN apt-get -y install rsync automake libtool linux-headers-amd64
 
 # Tools needed by install-octopus.sh
 RUN apt-get -y install lmod
