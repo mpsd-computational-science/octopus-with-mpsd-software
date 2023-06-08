@@ -30,7 +30,14 @@ RUN apt-get install -y --no-install-recommends \
 RUN apt-get -y install wget time nano vim emacs vim
 
 # Tools needed by mpsd-software-environment.py (and ../spack-setup.sh)
-RUN apt-get -y install rsync automake libtool linux-headers-amd64
+RUN apt-get -y install rsync automake libtool
+
+# Need to get the kernel headers to build knem. Only works if the kernel version
+# matches exactly.
+# use output of 'uname -r':
+RUN uname -a
+RUN uname -r
+RUN export UNAME_R=`uname -r`; apt-get -y install linux-headers-$UNAME_R
 
 # Tools needed by install-octopus.sh
 RUN apt-get -y install lmod
