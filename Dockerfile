@@ -30,8 +30,12 @@ RUN apt-get install -y --no-install-recommends \
 RUN apt-get -y install wget time nano vim emacs vim
 
 # Tools needed by mpsd-software-environment.py (and ../spack-setup.sh)
-RUN apt-get -y install rsync
+RUN apt-get -y install rsync automake libtool
 
+# Tools needed by install-octopus.sh
+RUN apt-get -y install lmod
+
+# prepare for pipx installation (to enable archspec installation)
 RUN echo "deb http://deb.debian.org/debian bullseye-backports main" >> /etc/apt/sources.list
 RUN apt-get -y update
 CMD bash -l
@@ -39,7 +43,8 @@ RUN apt-get -y install pipx
 # use funny locations so user 'user' can execute the program
 RUN PIPX_HOME=/opt/pipx PIPX_BIN_DIR=/usr/local/bin pipx install archspec
 
-RUN rm -rf /var/lib/apt/lists/*
+# tidy up
+# RUN rm -rf /var/lib/apt/lists/*
 
 RUN adduser user
 
@@ -64,19 +69,17 @@ RUN ./mpsd-software-environment.py --help
 
 RUN ./mpsd-software-environment.py -l debug install dev-23a --toolchain foss2022a-mpi
 
-# RUN 
-USER root
-RUN apt-get -y update
-RUN apt-get -y install automake libtool
 
 WORKDIR /home/user
+
+# call separate compilation of octopus demo into separate script
 ADD install-octopus.sh .
 RUN ls -l
 RUN bash -e -x install-octopus.sh
 
+# for debugging, switch to root
 USER root
 RUN echo "use user 'user' for normal operation ('su - user')"
 # Provide bash in case the image is meant to be used interactively
-CMD /bin/bash -l
-# 
-# 
+CMD /bin/bash
+
