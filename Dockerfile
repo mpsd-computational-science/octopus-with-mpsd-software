@@ -67,7 +67,7 @@ RUN ls -l
 
 RUN ./mpsd-software-environment.py --help
 
-RUN ./mpsd-software-environment.py -l debug install dev-23a --toolchain foss2022a-mpi
+RUN ./mpsd-software-environment.py -l debug install dev-23a --toolchain foss2022a-serial
 
 
 WORKDIR /home/user
