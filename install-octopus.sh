@@ -14,20 +14,20 @@ echo "It seems the toolchain foss2022a-mpi is compiled (based on checking logfil
 echo "but the module file generation has failed. Not enough detail in the logs to see why."
 echo "perhaps some dependency is missing?"
 
-# eval `/usr/share/lmod/lmod/libexec/lmod load toolchains/foss2022a-mpi`
-# mkdir -p build-octopus
-# cd build-octopus
-# git clone https://gitlab.com/octopus-code/octopus.git
-# cd octopus
-# pwd
-# ls -l
-# autoreconf -fi
-# mkdir _build
-# cd _build
-# cp ../../../mpsd-software-environments/dev-23a/spack-environments/octopus/foss2022a-mpi-config.sh .
-# source foss2022a-mpi-config.sh --prefix=`pwd`
-# make
-# make check
+eval `/usr/share/lmod/lmod/libexec/lmod load toolchains/foss2022a-mpi`
+mkdir -p build-octopus
+cd build-octopus
+git clone https://gitlab.com/octopus-code/octopus.git
+cd octopus
+pwd
+ls -l
+autoreconf -fi
+mkdir _build
+cd _build
+cp ../../../mpsd-software-environments/dev-23a/spack-environments/octopus/foss2022a-mpi-config.sh .
+source foss2022a-mpi-config.sh --prefix=`pwd`
+make
+make check
 
 
 
