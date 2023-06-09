@@ -5,6 +5,8 @@
 # we follow instructions from
 # https://computational-science.mpsd.mpg.de/docs/mpsd-hpc.html#loading-a-toolchain-to-compile-octopus
 
+export TOOLCHAIN=$1
+echo "Will install Octopus using toolchain $TOOLCHAIN"
 export ARCH=`archspec cpu`
 echo "ARCH is $ARCH"
 eval `/usr/share/lmod/lmod/libexec/lmod use mpsd-software-environments/dev-23a/$ARCH/lmod/Core`

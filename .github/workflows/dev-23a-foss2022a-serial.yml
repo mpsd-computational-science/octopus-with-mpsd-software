@@ -1,4 +1,4 @@
-name: dev-23a-foss2022a-mpi
+name: dev-23a-foss2022a-serial
 
 on:
   push:
@@ -16,5 +16,5 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image to check sequence of commands
-      run: make dev-23a-foss2022a-mpi
+      run: make dev-23a-foss2022a-serial
 
