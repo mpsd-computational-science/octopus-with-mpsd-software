@@ -13,3 +13,6 @@ docker-run:
 
 .PHONY: dev-23a-foss2022a-mpi
 
+clean:
+	rm -rf mpsd-software-environments
+	rm -rf build-octopus
