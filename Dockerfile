@@ -54,25 +54,24 @@ RUN chown -R user /io
 
 USER user
 
+# WORKDIR /home/user
+# RUN pwd
+# # clone installation script
+# RUN git clone https://gitlab.gwdg.de/mpsd-cs/mpsd-software-environments.git
+# WORKDIR /home/user/mpsd-software-environments
+# # RUN git fetch -a
+# # RUN git checkout more-robust-micro-architecture-detection
+# # RUN git pull -v
+# # RUN git branch
+# RUN ls -l
+# 
+# # RUN ./mpsd-software-environment.py --help
+# # 
+# # RUN ./mpsd-software-environment.py -l debug install dev-23a --toolchain ${TOOLCHAIN}
+
 WORKDIR /home/user
-RUN pwd
-# clone installation script
-RUN git clone https://gitlab.gwdg.de/mpsd-cs/mpsd-software-environments.git
-WORKDIR /home/user/mpsd-software-environments
-# RUN git fetch -a
-# RUN git checkout more-robust-micro-architecture-detection
-# RUN git pull -v
-# RUN git branch
-RUN ls -l
 
-RUN ./mpsd-software-environment.py --help
-
-RUN ./mpsd-software-environment.py -l debug install dev-23a --toolchain ${TOOLCHAIN}
-
-
-WORKDIR /home/user
-
-# call separate compilation of octopus demo into separate script
+# call toolchain compilation and compilation of octopus demo into separate script
 ADD install-octopus.sh .
 RUN ls -l
 RUN bash -e -x install-octopus.sh ${TOOLCHAIN}
