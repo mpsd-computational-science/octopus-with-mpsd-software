@@ -3,10 +3,10 @@ FROM debian:bullseye
 # # which spack version are we using now? Default is develop
 # # but other strings can be given to the docker build command
 # # (for example docker build --build-arg SPACK_VERSION=v0.16.2)
-ARG toolchain=foss2022a-serial
+ARG TOOLCHAIN=UNDEFINED
 ARG MPSD_RELEASE=dev-23a
 RUN echo "MPSD_RELEASE=${MPSD_RELEASE}"
-RUN echo "toolchain=${toolchain}"
+RUN echo "TOOLCHAIN=${TOOLCHAIN}"
 RUN cat /etc/issue
 # Install dependencies
 RUN apt-get -y update
@@ -67,7 +67,7 @@ RUN ls -l
 
 RUN ./mpsd-software-environment.py --help
 
-RUN ./mpsd-software-environment.py -l debug install dev-23a --toolchain ${toolchain}
+RUN ./mpsd-software-environment.py -l debug install dev-23a --toolchain ${TOOLCHAIN}
 
 
 WORKDIR /home/user
@@ -75,7 +75,7 @@ WORKDIR /home/user
 # call separate compilation of octopus demo into separate script
 ADD install-octopus.sh .
 RUN ls -l
-RUN bash -e -x install-octopus.sh ${toolchain}
+RUN bash -e -x install-octopus.sh ${TOOLCHAIN}
 
 # for debugging, switch to root
 USER root
