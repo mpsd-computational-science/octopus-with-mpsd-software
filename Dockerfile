@@ -118,14 +118,11 @@ RUN echo "MPSD_RELEASE=${MPSD_RELEASE}"
 RUN echo "TOOLCHAIN=${TOOLCHAIN}"
 RUN cat /etc/issue
 
-RUN eval `/usr/share/lmod/lmod/libexec/lmod use mpsd-software-environments/dev-23a/$(archspec cpu)/lmod/Core`
-RUN eval `/usr/share/lmod/lmod/libexec/lmod avail`
 
 RUN echo "It seems the toolchain foss2022a-mpi is compiled (based on checking logfiles)"
 RUN echo "but the module file generation has failed. Not enough detail in the logs to see why."
 RUN echo "perhaps some dependency is missing?"
 
-RUN eval `/usr/share/lmod/lmod/libexec/lmod load toolchains/$TOOLCHAIN`
 
 # we follow instructions from
 # https://computational-science.mpsd.mpg.de/docs/mpsd-hpc.html#loading-a-toolchain-to-compile-octopus
@@ -140,7 +137,10 @@ RUN autoreconf -fi
 RUN mkdir _build
 WORKDIR /home/user/build-octopus/_build
 RUN cp ../../../mpsd-software-environments/dev-23a/spack-environments/octopus/$TOOLCHAIN-config.sh .
-RUN source $TOOLCHAIN-config.sh --prefix=`pwd`
-RUN make
+RUN eval `/usr/share/lmod/lmod/libexec/lmod use mpsd-software-environments/dev-23a/$(archspec cpu)/lmod/Core` && \
+    eval `/usr/share/lmod/lmod/libexec/lmod avail` && \
+    eval `/usr/share/lmod/lmod/libexec/lmod load toolchains/$TOOLCHAIN` && \
+    source $TOOLCHAIN-config.sh --prefix=`pwd` && \
+    make -j && \
 RUN echo "make check is next"
 
