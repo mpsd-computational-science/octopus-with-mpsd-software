@@ -6,8 +6,8 @@ echo "ARCH is $ARCH"
 git clone https://gitlab.gwdg.de/mpsd-cs/mpsd-software-environments.git
 cd mpsd-software-environments
 ls -l
-./mpsd-software-environment.py --help
-./mpsd-software-environment.py -l debug install dev-23a --toolchain ${TOOLCHAIN}
+./mpsd-software.py --help
+./mpsd-software.py -l debug install dev-23a --toolchain ${TOOLCHAIN}
 
 cd ..
 pwd
