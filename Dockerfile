@@ -92,7 +92,7 @@ RUN echo "MPSD_RELEASE=${MPSD_RELEASE}"
 RUN echo "TOOLCHAIN=${TOOLCHAIN}"
 RUN cat /etc/issue
 RUN git clone https://gitlab.gwdg.de/mpsd-cs/mpsd-software-environments.git
-RUN cd mpsd-software-environments
+WORKDIR /home/user/mpsd-software-environments
 RUN ls -l
 RUN ./mpsd-software.py --help
 RUN ./mpsd-software.py -l debug install dev-23a --toolchain ${TOOLCHAIN}
@@ -128,14 +128,14 @@ RUN eval `/usr/share/lmod/lmod/libexec/lmod load toolchains/$TOOLCHAIN`
 # https://computational-science.mpsd.mpg.de/docs/mpsd-hpc.html#loading-a-toolchain-to-compile-octopus
 
 RUN mkdir -p build-octopus
-RUN cd build-octopus
+WORKDIR /home/user/build-octopus
 RUN git clone https://gitlab.com/octopus-code/octopus.git
-RUN cd octopus
+WORKDIR /home/user/build-octopus/octopus
 RUN pwd
 RUN ls -l
 RUN autoreconf -fi
 RUN mkdir _build
-RUN cd _build
+WORKDIR /home/user/build-octopus/_build
 RUN cp ../../../mpsd-software-environments/dev-23a/spack-environments/octopus/$TOOLCHAIN-config.sh .
 RUN source $TOOLCHAIN-config.sh --prefix=`pwd`
 RUN make
