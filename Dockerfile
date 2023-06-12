@@ -115,7 +115,7 @@ RUN echo "MPSD_RELEASE=${MPSD_RELEASE}"
 RUN echo "TOOLCHAIN=${TOOLCHAIN}"
 RUN cat /etc/issue
 
-RUN eval `/usr/share/lmod/lmod/libexec/lmod use mpsd-software-environments/dev-23a/$ARCH/lmod/Core`
+RUN eval `/usr/share/lmod/lmod/libexec/lmod use mpsd-software-environments/dev-23a/$(archspec cpu)/lmod/Core`
 RUN eval `/usr/share/lmod/lmod/libexec/lmod avail`
 
 RUN echo "It seems the toolchain foss2022a-mpi is compiled (based on checking logfiles)"
