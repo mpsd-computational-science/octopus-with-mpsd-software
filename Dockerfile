@@ -40,6 +40,7 @@ CMD bash -l
 RUN apt-get -y install pipx
 # use funny locations so user 'user' can execute the program
 RUN PIPX_HOME=/opt/pipx PIPX_BIN_DIR=/usr/local/bin pipx install archspec
+
 # Tools needed by install-octopus.sh
 # install lmod from debian testing as we need lmod 8.6.5 or newer
 RUN echo "deb http://deb.debian.org/debian testing main" >> /etc/apt/sources.list
