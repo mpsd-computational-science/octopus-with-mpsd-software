@@ -14,9 +14,9 @@ docker-run:
 docker-build-base-environment:
 	docker build  --target base-environment --progress=plain -f Dockerfile --build-arg MPSD_RELEASE=dev-23a --build-arg TOOLCHAIN=foss2022a-serial -t octopus-base-environment .
 docker-build-toolchain: docker-build-base-environment
-	docker build  --target toolchain-environtment --progress=plain -f Dockerfile --build-arg MPSD_RELEASE=dev-23a --build-arg TOOLCHAIN=foss2022a-serial -t octopus-base-environment .
+	docker build  --target toolchain-environtment --progress=plain -f Dockerfile --build-arg MPSD_RELEASE=dev-23a --build-arg TOOLCHAIN=foss2022a-serial -t octopus-toolchain-environment .
 docker-build-octopus: docker-build-toolchain
-	docker build  --target octopus-build --progress=plain -f Dockerfile --build-arg MPSD_RELEASE=dev-23a --build-arg TOOLCHAIN=foss2022a-serial -t octopus-base-environment .
+	docker build  --target octopus-build --progress=plain -f Dockerfile --build-arg MPSD_RELEASE=dev-23a --build-arg TOOLCHAIN=foss2022a-serial -t octopus-binary-environment .
 
 .PHONY: dev-23a-foss2022a-mpi
 
