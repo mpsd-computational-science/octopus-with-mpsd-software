@@ -32,8 +32,6 @@ RUN apt-get -y install wget time nano vim emacs vim
 # Tools needed by mpsd-software-environment.py (and ../spack-setup.sh)
 RUN apt-get -y install rsync automake libtool linux-headers-amd64
 
-# Tools needed by install-octopus.sh
-RUN apt-get -y install lmod
 
 # prepare for pipx installation (to enable archspec installation)
 RUN echo "deb http://deb.debian.org/debian bullseye-backports main" >> /etc/apt/sources.list
@@ -42,6 +40,10 @@ CMD bash -l
 RUN apt-get -y install pipx
 # use funny locations so user 'user' can execute the program
 RUN PIPX_HOME=/opt/pipx PIPX_BIN_DIR=/usr/local/bin pipx install archspec
+# Tools needed by install-octopus.sh
+# install lmod from debian testing as we need lmod 8.6.5 or newer
+RUN echo "deb http://deb.debian.org/debian testing main" >> /etc/apt/sources.list
+RUN apt-get -y update && apt-get -y install lmod
 
 # tidy up
 # RUN rm -rf /var/lib/apt/lists/*
