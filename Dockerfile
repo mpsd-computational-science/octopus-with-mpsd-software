@@ -135,12 +135,15 @@ RUN pwd
 RUN ls -l
 RUN autoreconf -fi
 RUN mkdir _build
-WORKDIR /home/user/build-octopus/_build
-RUN cp ../../../mpsd-software-environments/dev-23a/spack-environments/octopus/$TOOLCHAIN-config.sh .
-RUN eval `/usr/share/lmod/lmod/libexec/lmod use mpsd-software-environments/dev-23a/$(archspec cpu)/lmod/Core` && \
+WORKDIR /home/user/build-octopus/octopus/_build
+RUN pwd
+RUN cp /home/user/mpsd-software-environments/dev-23a/spack-environments/octopus/$TOOLCHAIN-config.sh .
+RUN ls -l
+RUN export MODULEPATH="/home/user/mpsd-software-environments/dev-23a/$(archspec cpu)/lmod/Core" && \
     eval `/usr/share/lmod/lmod/libexec/lmod avail` && \
     eval `/usr/share/lmod/lmod/libexec/lmod load toolchains/$TOOLCHAIN` && \
-    source $TOOLCHAIN-config.sh --prefix=`pwd` && \
-    make -j && \
-RUN echo "make check is next"
+    . "/home/user/build-octopus/octopus/_build/$TOOLCHAIN-config.sh" --prefix=`pwd` && \
+    make -j
+    make install
+# RUN echo "make check is next"
 
