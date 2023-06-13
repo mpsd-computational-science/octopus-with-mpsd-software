@@ -139,17 +139,7 @@ WORKDIR /home/user/build-octopus/octopus/_build
 RUN pwd
 RUN cp /home/user/mpsd-software-environments/dev-23a/spack-environments/octopus/$TOOLCHAIN-config.sh .
 RUN ls -l
-RUN echo "TOOLCHAIN=${TOOLCHAIN}"
 ADD install-octopus.sh .
 RUN bash install-octopus.sh ${TOOLCHAIN}
-# RUN export MODULEPATH="/home/user/mpsd-software-environments/dev-23a/$(archspec cpu)/lmod/Core" && \
-#     eval `/usr/share/lmod/lmod/libexec/lmod avail` && \
-#     eval `/usr/share/lmod/lmod/libexec/lmod load toolchains/$TOOLCHAIN` && \
-#     . "/home/user/build-octopus/octopus/_build/$TOOLCHAIN-config.sh" --prefix=/home/user/build-octopus/octopus/_build/installed && \
-#     make -j
-# RUN export MODULEPATH="/home/user/mpsd-software-environments/dev-23a/$(archspec cpu)/lmod/Core" && \
-#     eval `/usr/share/lmod/lmod/libexec/lmod avail` && \
-#     eval `/usr/share/lmod/lmod/libexec/lmod load toolchains/$TOOLCHAIN` && \
-#     make install
-# RUN echo "make check is next"
+
 
