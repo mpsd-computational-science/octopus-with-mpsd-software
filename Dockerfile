@@ -1,3 +1,8 @@
+# Dockerfile for building the toolchains and octopus
+# the build is split into 3 stages:
+# 1. base-environment: contains the base environment for building the toolchain
+# 2. toolchain-environment: contains the toolchain
+# 3. octopus-build: contains the octopus build
 FROM debian:bullseye AS base-environment
 
 # # which spack version are we using now? Default is develop
