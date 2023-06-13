@@ -9,7 +9,7 @@ make -j
 make install
 # run a simple octopus example
 echo "CalculationMode = recipe" > inp
-bin/octopus
+installed/bin/octopus
 echo "make check is next"
 
 
