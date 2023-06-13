@@ -142,8 +142,8 @@ RUN ls -l
 RUN export MODULEPATH="/home/user/mpsd-software-environments/dev-23a/$(archspec cpu)/lmod/Core" && \
     eval `/usr/share/lmod/lmod/libexec/lmod avail` && \
     eval `/usr/share/lmod/lmod/libexec/lmod load toolchains/$TOOLCHAIN` && \
-    . "/home/user/build-octopus/octopus/_build/$TOOLCHAIN-config.sh" --prefix=`pwd` && \
-    make -j
+    . "/home/user/build-octopus/octopus/_build/$TOOLCHAIN-config.sh" --prefix=/home/user/build-octopus/octopus/_build/installed && \
+    make -j && \
     make install
 # RUN echo "make check is next"
 
