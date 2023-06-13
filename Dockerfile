@@ -65,6 +65,9 @@ CMD /bin/bash
 
 FROM base-environment AS toolchain-environtment 
 # This part of the docker file contains instructions to build the toolchain
+# needs the following arguments:
+# TOOLCHAIN: the name of the toolchain to build (e.g. foss2022a-mpi)
+# MPSD_RELEASE: the name of the mpsd release to build (e.g. dev-23a)
 USER user
 WORKDIR /home/user
 ARG TOOLCHAIN=UNDEFINED
@@ -76,13 +79,15 @@ RUN git clone https://gitlab.gwdg.de/mpsd-cs/mpsd-software-environments.git
 WORKDIR /home/user/mpsd-software-environments
 RUN ls -l
 RUN ./mpsd-software.py --help
-RUN ./mpsd-software.py -l debug install dev-23a --toolchain ${TOOLCHAIN}
+# build requested toolchain
+RUN ./mpsd-software.py -l debug install ${MPSD_RELEASE} --toolchain ${TOOLCHAIN}
 
 # for debugging, switch to root
 USER root
 RUN echo "use user 'user' for normal operation ('su - user')"
 # Provide bash in case the image is meant to be used interactively
 CMD /bin/bash
+
 
 FROM toolchain-environtment AS octopus-build
 # This part of the docker file contains instructions to build octopus 
