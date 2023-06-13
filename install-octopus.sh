@@ -7,7 +7,7 @@ source $TOOLCHAIN-config.sh --prefix=`pwd`
 make -j
 make install
 # run a simple octopus example
-echo "CalculationMode = reci" > inp
+echo "CalculationMode = recipe" > inp
 bin/octopus
 echo "make check is next"
 

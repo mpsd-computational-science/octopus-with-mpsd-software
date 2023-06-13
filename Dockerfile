@@ -139,6 +139,7 @@ WORKDIR /home/user/build-octopus/octopus/_build
 RUN pwd
 RUN cp /home/user/mpsd-software-environments/dev-23a/spack-environments/octopus/$TOOLCHAIN-config.sh .
 RUN ls -l
+RUN echo "docker pelase do this again"
 ADD install-octopus.sh .
 RUN bash install-octopus.sh ${TOOLCHAIN}
 
