@@ -4,7 +4,7 @@ eval `/usr/share/lmod/lmod/libexec/lmod use "/home/user/mpsd-software-environmen
 eval `/usr/share/lmod/lmod/libexec/lmod avail`
 eval `/usr/share/lmod/lmod/libexec/lmod load toolchains/${TOOLCHAIN}`
 
-source ${TOOLCHAIN}-config.sh --prefix=`pwd`
+source ${TOOLCHAIN}-config.sh --prefix=`pwd`/installed
 make -j
 make install
 # run a simple octopus example
