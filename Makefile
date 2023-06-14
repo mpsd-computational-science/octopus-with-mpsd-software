@@ -13,7 +13,7 @@ docker-run:
 docker-build-base-environment:
 	docker build  --target base-environment --progress=plain -f Dockerfile -t octopus-base-environment .
 docker-build-toolchain: docker-build-base-environment
-	docker build  --target toolchain-environtment --progress=plain -f Dockerfile --build-arg MPSD_RELEASE=$(MPSD_RELEASE) --build-arg TOOLCHAIN=$(TOOLCHAIN) -t octopus-toolchain-environment .
+	docker build  --target toolchain-environment --progress=plain -f Dockerfile --build-arg MPSD_RELEASE=$(MPSD_RELEASE) --build-arg TOOLCHAIN=$(TOOLCHAIN) -t octopus-toolchain-environment .
 docker-build-octopus: docker-build-toolchain
 	docker build  --target octopus-build --progress=plain -f Dockerfile --build-arg MPSD_RELEASE=$(MPSD_RELEASE) --build-arg TOOLCHAIN=$(TOOLCHAIN) -t octopus-binary-environment .
 
