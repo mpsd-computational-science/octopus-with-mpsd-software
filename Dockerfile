@@ -75,8 +75,8 @@ ARG MPSD_RELEASE=dev-23a
 RUN echo "MPSD_RELEASE=${MPSD_RELEASE}"
 RUN echo "TOOLCHAIN=${TOOLCHAIN}"
 RUN cat /etc/issue
-RUN git clone https://gitlab.gwdg.de/mpsd-cs/mpsd-software-environments.git
-WORKDIR /home/user/mpsd-software-environments
+RUN git clone https://gitlab.gwdg.de/mpsd-cs/mpsd-software.git
+WORKDIR /home/user/mpsd-software
 RUN ls -l
 RUN ./mpsd-software.py --help
 # build requested toolchain
@@ -120,7 +120,7 @@ RUN autoreconf -fi
 RUN mkdir _build
 WORKDIR /home/user/build-octopus/octopus/_build
 RUN pwd
-RUN cp /home/user/mpsd-software-environments/${MPSD_RELEASE}/spack-environments/octopus/${TOOLCHAIN}-config.sh .
+RUN cp /home/user/mpsd-software/${MPSD_RELEASE}/spack-environments/octopus/${TOOLCHAIN}-config.sh .
 RUN ls -l
 RUN echo "docker pelase do this again"
 ADD install-octopus.sh .
