@@ -1,0 +1,19 @@
+name: dev-23a-foss2022a-serial
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image to check sequence of commands
+      run: make docker-build-octopus
