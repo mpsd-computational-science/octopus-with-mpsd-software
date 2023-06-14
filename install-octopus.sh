@@ -1,6 +1,6 @@
 export TOOLCHAIN=$1
 export MPSD_RELEASE=$2
-eval `/usr/share/lmod/lmod/libexec/lmod use "/home/user/mpsd-software/${MPSD_RELEASE}/$(archspec cpu)/lmod/Core"`
+eval `/usr/share/lmod/lmod/libexec/lmod use "~/mpsd-software/${MPSD_RELEASE}/$(archspec cpu)/lmod/Core"`
 eval `/usr/share/lmod/lmod/libexec/lmod avail`
 eval `/usr/share/lmod/lmod/libexec/lmod load toolchains/${TOOLCHAIN}`
 

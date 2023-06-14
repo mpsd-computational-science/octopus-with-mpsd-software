@@ -75,13 +75,6 @@ ARG MPSD_RELEASE=dev-23a
 RUN echo "MPSD_RELEASE=${MPSD_RELEASE}"
 RUN echo "TOOLCHAIN=${TOOLCHAIN}"
 RUN cat /etc/issue
-RUN git clone https://gitlab.gwdg.de/mpsd-cs/mpsd-software.git
-WORKDIR /home/user/mpsd-software
-RUN ls -l
-RUN ./mpsd-software.py --help
-RUN ./mpsd-software.py --version
-# build requested toolchain
-RUN ./mpsd-software.py -l debug install ${MPSD_RELEASE} --toolchain ${TOOLCHAIN}
 
 # for debugging, switch to root
 USER root
@@ -101,6 +94,8 @@ ARG MPSD_RELEASE=dev-23a
 RUN echo "MPSD_RELEASE=${MPSD_RELEASE}"
 RUN echo "TOOLCHAIN=${TOOLCHAIN}"
 RUN cat /etc/issue
+ADD install-toolchain.sh .
+RUN bash install-toolchain.sh ${TOOLCHAIN} ${MPSD_RELEASE}
 
 
 # we follow instructions from
