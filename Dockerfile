@@ -63,7 +63,7 @@ RUN echo "use user 'user' for normal operation ('su - user')"
 CMD /bin/bash
 
 
-FROM base-environment AS toolchain-environtment 
+FROM base-environment AS toolchain-environment 
 # This part of the docker file contains instructions to build the toolchain
 # needs the following arguments:
 # TOOLCHAIN: the name of the toolchain to build (e.g. foss2022a-mpi)
@@ -79,6 +79,7 @@ RUN git clone https://gitlab.gwdg.de/mpsd-cs/mpsd-software.git
 WORKDIR /home/user/mpsd-software
 RUN ls -l
 RUN ./mpsd-software.py --help
+RUN ./mpsd-software.py --version
 # build requested toolchain
 RUN ./mpsd-software.py -l debug install ${MPSD_RELEASE} --toolchain ${TOOLCHAIN}
 
@@ -89,7 +90,7 @@ RUN echo "use user 'user' for normal operation ('su - user')"
 CMD /bin/bash
 
 
-FROM toolchain-environtment AS octopus-build
+FROM toolchain-environment AS octopus-build
 # This part of the docker file contains instructions to build octopus 
 # with the toolchain built in the previous step
 
@@ -100,11 +101,6 @@ ARG MPSD_RELEASE=dev-23a
 RUN echo "MPSD_RELEASE=${MPSD_RELEASE}"
 RUN echo "TOOLCHAIN=${TOOLCHAIN}"
 RUN cat /etc/issue
-
-
-RUN echo "It seems the toolchain foss2022a-mpi is compiled (based on checking logfiles)"
-RUN echo "but the module file generation has failed. Not enough detail in the logs to see why."
-RUN echo "perhaps some dependency is missing?"
 
 
 # we follow instructions from
@@ -122,7 +118,6 @@ WORKDIR /home/user/build-octopus/octopus/_build
 RUN pwd
 RUN cp /home/user/mpsd-software/${MPSD_RELEASE}/spack-environments/octopus/${TOOLCHAIN}-config.sh .
 RUN ls -l
-RUN echo "docker pelase do this again"
 ADD install-octopus.sh .
 RUN bash install-octopus.sh ${TOOLCHAIN} ${MPSD_RELEASE}
 
