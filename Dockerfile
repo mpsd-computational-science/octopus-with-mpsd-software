@@ -81,7 +81,7 @@ RUN ls -l
 RUN ./mpsd-software.py --help
 RUN ./mpsd-software.py --version
 # build requested toolchain
-RUN ./mpsd-software.py -l debug install ${MPSD_RELEASE} --toolchain ${TOOLCHAIN}
+RUN ./mpsd-software.py -l debug install ${MPSD_RELEASE} ${TOOLCHAIN}
 
 # for debugging, switch to root
 USER root
