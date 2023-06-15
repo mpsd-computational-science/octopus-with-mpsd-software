@@ -27,7 +27,7 @@ RUN apt-get install -y --no-install-recommends \
 # Convenience tools, if desired for debugging etc
 RUN apt-get -y install wget time nano vim emacs vim
 
-# Tools needed by mpsd-software-environment.py (and ../spack-setup.sh)
+# Tools needed by mpsd-software.py (and ../spack-setup.sh)
 RUN apt-get -y install rsync automake libtool linux-headers-amd64
 
 
@@ -81,7 +81,7 @@ RUN ls -l
 RUN ./mpsd-software.py --help
 RUN ./mpsd-software.py --version
 # build requested toolchain
-RUN ./mpsd-software.py -l debug install ${MPSD_RELEASE} --toolchain ${TOOLCHAIN}
+RUN ./mpsd-software.py -l debug install ${MPSD_RELEASE} ${TOOLCHAIN}
 
 # for debugging, switch to root
 USER root
