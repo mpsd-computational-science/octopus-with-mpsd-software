@@ -1,18 +1,11 @@
-Octopus toolchain documentation
-===============================
+|dev-23a-foss2022a-serial|
 
-How to install Octopus toolchains (spack-based, as on MPSD HPC)
-
-
-
-Status
--------
-
-- |dev-23a-foss2022a-mpi|
+Installing Octopus with mpsd-software-manager
+=============================================
 
 
 
 
-.. |dev-23a-foss2022a-mpi| image:: https://github.com/mpsd-computational-science/octopus-toolchain-docs/actions/workflows/spack-develop-octopus-stable.yml/badge.svg
-   :target: https://github.com/mpsd-computational-science/octopus-toolchain-docs/actions/workflows/dev-23a-foss2022a-mpi.yml
-
+.. |dev-23a-foss2022a-serial| image:: https://github.com/mpsd-computational-science/octopus-with-mpsd-software/actions/workflows/dev-23a-foss2022a-serial.yml/badge.svg
+   :target: https://github.com/mpsd-computational-science/octopus-with-mpsd-software/actions/workflows/dev-23a-foss2022a-serial.yml
+   
