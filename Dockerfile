@@ -79,31 +79,13 @@ RUN git clone https://gitlab.gwdg.de/mpsd-cs/mpsd-software.git
 WORKDIR /home/user/mpsd-software
 RUN python3 -m pip install  /home/user/mpsd-software
 RUN ls -l
-RUN mpsd-software.py --help
-RUN mpsd-software.py --version
+ENV PATH /home/user/.local/bin:$PATH
+RUN mpsd-software --help
+RUN mpsd-software --version
 # build requested toolchain
 # RUN ./mpsd-software.py -l debug install ${MPSD_RELEASE} ${TOOLCHAIN}
 
-# for debugging, switch to root
-USER root
-RUN echo "use user 'user' for normal operation ('su - user')"
-# Provide bash in case the image is meant to be used interactively
-CMD /bin/bash
-
-
-FROM toolchain-environment AS octopus-build
-# This part of the docker file contains instructions to build octopus 
-# with the toolchain built in the previous step
-
-USER user
-WORKDIR /home/user
-ARG TOOLCHAIN=UNDEFINED
-ARG MPSD_RELEASE=dev-23a
-RUN echo "MPSD_RELEASE=${MPSD_RELEASE}"
-RUN echo "TOOLCHAIN=${TOOLCHAIN}"
-RUN cat /etc/issue
-
-
+ADD install-octopus.sh .
 # we follow instructions from
 # https://computational-science.mpsd.mpg.de/docs/mpsd-hpc.html#loading-a-toolchain-to-compile-octopus
 
