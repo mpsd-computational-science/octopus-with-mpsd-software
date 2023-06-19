@@ -78,8 +78,8 @@ RUN cat /etc/issue
 RUN git clone https://gitlab.gwdg.de/mpsd-cs/mpsd-software.git
 WORKDIR /home/user/mpsd-software
 RUN python3 -m pip install  /home/user/mpsd-software
-RUN ls -l
 ENV PATH /home/user/.local/bin:$PATH
+RUN ls -l
 RUN mpsd-software --help
 RUN mpsd-software --version
 # build requested toolchain
@@ -89,6 +89,6 @@ ADD install-octopus.sh .
 # we follow instructions from
 # https://computational-science.mpsd.mpg.de/docs/mpsd-hpc.html#loading-a-toolchain-to-compile-octopus
 
-RUN bash install-octopus.sh ${TOOLCHAIN} ${MPSD_RELEASE} /home/user/octopus_build
+RUN bash -e install-octopus.sh ${TOOLCHAIN} ${MPSD_RELEASE} /home/user/octopus_build
 
 
