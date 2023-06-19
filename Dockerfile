@@ -28,7 +28,7 @@ RUN apt-get install -y --no-install-recommends \
 RUN apt-get -y install wget time nano vim emacs vim
 
 # Tools needed by mpsd-software-manager (and ../spack-setup.sh)
-RUN apt-get -y install rsync automake libtool linux-headers-amd64 pipx
+RUN apt-get -y install rsync automake libtool linux-headers-amd64 python-pipx
 
 
 # prepare for pipx installation (to enable archspec installation)
