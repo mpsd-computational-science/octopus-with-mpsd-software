@@ -42,11 +42,12 @@ if [ $toolchain_dir == None ]; then
     echo "Building the toolchain"
     mkdir -p $BUILD_DIR/toolchains
     cd $BUILD_DIR/toolchains
-    git clone https://gitlab.gwdg.de/mpsd-cs/mpsd-software-manager .
-    ./mpsd-software.py --help
-    ./mpsd-software.py --version
+    # git clone https://gitlab.gwdg.de/mpsd-cs/mpsd-software-manager .
+    mpsd-software.py --help
+    mpsd-software.py --version
     # build requested toolchain
-    ./mpsd-software.py -l debug install ${MPSD_RELEASE} --toolchain ${TOOLCHAIN}
+    echo "Building the toolchain"
+    mpsd-software.py -l debug install ${MPSD_RELEASE} --toolchain ${TOOLCHAIN}
 
     export toolchain_dir="$BUILD_DIR/toolchains/${MPSD_RELEASE}/$(archspec cpu)/lmod/Core"
 else

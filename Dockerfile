@@ -10,18 +10,19 @@ RUN apt-get -y update
 # From https://github.com/ax3l/dockerfiles/blob/master/spack/base/Dockerfile:
 # install minimal spack dependencies
 RUN apt-get install -y \
-              autoconf \
-              build-essential \
-              ca-certificates \
-              coreutils \
-              curl \
-              environment-modules \
-	            file \
-              gfortran \
-              git \
-              openssh-server \
-    python \
-              unzip
+            autoconf \
+            build-essential \
+            ca-certificates \
+            coreutils \
+            curl \
+            environment-modules \
+            file \
+            gfortran \
+            git \
+            openssh-server \
+            python-is-python3 \
+            python3-pip \
+            unzip
 
 # Convenience tools, if desired for debugging etc
 RUN apt-get -y install wget time nano vim emacs vim
@@ -76,11 +77,12 @@ RUN echo "TOOLCHAIN=${TOOLCHAIN}"
 RUN cat /etc/issue
 RUN git clone https://gitlab.gwdg.de/mpsd-cs/mpsd-software.git
 WORKDIR /home/user/mpsd-software
+RUN python3 -m pip install  /home/user/mpsd-software
 RUN ls -l
-RUN ./mpsd-software.py --help
-RUN ./mpsd-software.py --version
+RUN mpsd-software.py --help
+RUN mpsd-software.py --version
 # build requested toolchain
-RUN ./mpsd-software.py -l debug install ${MPSD_RELEASE} ${TOOLCHAIN}
+# RUN ./mpsd-software.py -l debug install ${MPSD_RELEASE} ${TOOLCHAIN}
 
 # for debugging, switch to root
 USER root
