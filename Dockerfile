@@ -9,7 +9,7 @@ RUN cat /etc/issue
 RUN apt-get -y update
 # From https://github.com/ax3l/dockerfiles/blob/master/spack/base/Dockerfile:
 # install minimal spack dependencies
-RUN apt-get install -y --no-install-recommends \
+RUN apt-get install -y \
               autoconf \
               build-essential \
               ca-certificates \
