@@ -27,8 +27,9 @@ RUN apt-get install -y --no-install-recommends \
 # Convenience tools, if desired for debugging etc
 RUN apt-get -y install wget time nano vim emacs vim
 
-# Tools needed by mpsd-software-environment.py (and ../spack-setup.sh)
-RUN apt-get -y install rsync automake libtool linux-headers-amd64
+# Tools needed by mpsd-software-manager (and ../spack-setup.sh)
+RUN apt-get -y install rsync automake libtool
+#    linux-headers-amd64
 
 
 # prepare for pipx installation (to enable archspec installation)
@@ -36,7 +37,7 @@ RUN echo "deb http://deb.debian.org/debian bullseye-backports main" >> /etc/apt/
 RUN apt-get -y update
 CMD bash -l
 RUN apt-get -y install pipx
-# use funny locations so user 'user' can execute the program
+# # use funny locations so user 'user' can execute the program
 RUN PIPX_HOME=/opt/pipx PIPX_BIN_DIR=/usr/local/bin pipx install archspec
 
 # Tools needed by install-octopus.sh
@@ -75,13 +76,22 @@ ARG MPSD_RELEASE=dev-23a
 RUN echo "MPSD_RELEASE=${MPSD_RELEASE}"
 RUN echo "TOOLCHAIN=${TOOLCHAIN}"
 RUN cat /etc/issue
+# RUN pipx install git+https://gitlab.gwdg.de/mpsd-cs/mpsd-software-manager
 RUN git clone https://gitlab.gwdg.de/mpsd-cs/mpsd-software.git
 WORKDIR /home/user/mpsd-software
+RUN pipx install .
+
+# Getting mpsd-software into search path
+RUN pipx ensurepath
+ENV PATH=/home/user/.local/bin:$PATH
+
 RUN ls -l
-RUN ./mpsd-software.py --help
-RUN ./mpsd-software.py --version
+RUN mpsd-software --help
+RUN mpsd-software --version
+
 # build requested toolchain
-RUN ./mpsd-software.py -l debug install ${MPSD_RELEASE} ${TOOLCHAIN}
+RUN mpsd-software -l debug install ${MPSD_RELEASE} ${TOOLCHAIN}
+RUN mpsd-software -l debug status ${MPSD_RELEASE}
 
 # for debugging, switch to root
 USER root
