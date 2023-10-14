@@ -90,6 +90,7 @@ RUN mpsd-software --help
 RUN mpsd-software --version
 
 # build requested toolchain
+RUN mpsd-software -l debug init 
 RUN mpsd-software -l debug install ${MPSD_RELEASE} ${TOOLCHAIN}
 RUN mpsd-software -l debug status ${MPSD_RELEASE}
 
